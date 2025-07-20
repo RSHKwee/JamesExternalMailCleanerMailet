@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.kwee.james</groupId>
+    <artifactId>external-mail-cleaner</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>James External Mail Cleaner</name>
+    <description>Custom mailet for cleaning external IMAP accounts</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <james.version>3.8.2</james.version> <!-- Pas aan naar jouw James versie -->
+        <commons.configuration.version>2.8.0</commons.configuration.version>
+        <javamail.version>1.6.2</javamail.version>
+    </properties>
+
+    <dependencies>
+        <!-- James Mailet API -->
+        <dependency>
+            <groupId>org.apache.james</groupId>
+            <artifactId>james-server-mailet-lib</artifactId>
+            <version>${james.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- Commons Configuration -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-configuration2</artifactId>
+            <version>${commons.configuration.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- JavaMail (IMAP) -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>${javamail.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- James encryptie-utils -->
+        <dependency>
+            <groupId>org.apache.james</groupId>
+            <artifactId>james-util</artifactId>
+            <version>${james.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.james</groupId>
+            <artifactId>apache-mailet-base</artifactId>
+            <scope>compile</scope>
+            <version>${james.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.james</groupId>
+            <artifactId>james-server-testing</artifactId>
+            <scope>test</scope>
+            <version>${james.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.james/james-core -->
+        <dependency>
+           <groupId>org.apache.james</groupId>
+           <artifactId>james-core</artifactId>
+           <version>3.8.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Compilatie plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            
+            <!-- JAR packaging -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            
+            <!-- Resource filtering -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>xml</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
