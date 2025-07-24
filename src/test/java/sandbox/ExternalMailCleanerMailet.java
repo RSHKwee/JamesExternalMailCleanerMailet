@@ -1,6 +1,7 @@
-package com.kwee.james.mailets;
+package sandbox;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -139,6 +140,18 @@ public class ExternalMailCleanerMailet extends GenericMailet {
         return false;
       }
     }
+  }
+
+  // ============================================================
+  public static void main(String[] args) throws IOException {
+    ExternalMailCleanerMailet ExtMailet = new ExternalMailCleanerMailet();
+    try {
+      ExtMailet.cleanExternalAccounts();
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
   }
 
 }
