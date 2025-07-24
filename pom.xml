@@ -2,138 +2,176 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.kwee.james</groupId>
-    <artifactId>external-mail-cleaner</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+  <groupId>com.kwee.james</groupId>
+  <artifactId>external-mail-cleaner</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-    <name>James External Mail Cleaner</name>
-    <description>Custom mailet for cleaning external IMAP accounts</description>
+  <name>James External Mail Cleaner</name>
+  <description>Custom mailet for cleaning external IMAP accounts</description>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <james.version>3.8.2</james.version> <!-- Pas aan naar jouw James versie -->
-        <commons.configuration.version>2.8.0</commons.configuration.version>
-        <javamail.version>1.6.2</javamail.version>
-    </properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <james.version>3.8.2</james.version> <!-- Pas aan naar jouw James versie -->
+    <commons.configuration.version>2.8.0</commons.configuration.version>
+    <javamail.version>1.6.2</javamail.version>
+    <org.slf4j.version>2.0.4</org.slf4j.version>
+  </properties>
 
-    <dependencies>
-      <!-- James Mailet API -->
+  <dependencies>
+    <!-- James Mailet API -->
+    <dependency>
+      <groupId>org.apache.james</groupId>
+      <artifactId>apache-mailet-api</artifactId>
+      <version>${james.version}</version>
+      <scope>provided</scope> <!-- James biedt dit al tijdens runtime -->
+    </dependency>
+
+    <!-- James core (optioneel, afhankelijk van functionaliteit) -->
+    <!-- https://mvnrepository.com/artifact/org.apache.james/james-core -->
+    <dependency>
+      <groupId>org.apache.james</groupId>
+      <artifactId>james-core</artifactId>
+      <version>${james.version}</version>
+    </dependency> 
+    <dependency>
+      <groupId>org.apache.james</groupId>
+      <artifactId>james-server-core</artifactId>
+      <version>${james.version}</version>
+      <scope>provided</scope>
+    </dependency>
       <dependency>
-        <groupId>org.apache.james</groupId>
-        <artifactId>apache-mailet-api</artifactId>
-        <version>${james.version}</version>
-        <scope>provided</scope> <!-- James biedt dit al tijdens runtime -->
-      </dependency>
+      <groupId>org.apache.james</groupId>
+      <artifactId>james-server-util</artifactId>
+      <version>${james.version}</version>
+      <scope>provided</scope>
+    </dependency>
 
-      <!-- James core (optioneel, afhankelijk van functionaliteit) -->
-      <dependency>
-        <groupId>org.apache.james</groupId>
-        <artifactId>james-server-core</artifactId>
-        <version>${james.version}</version>
-        <scope>provided</scope>
-      </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-crypto -->
-
-        <!-- Commons Configuration -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-configuration2</artifactId>
-            <version>${commons.configuration.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        
-        <!-- JavaMail (IMAP) -->
-        <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
-            <version>${javamail.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        
-<dependency>
-    <groupId>org.apache.james</groupId>
-    <artifactId>james-server-util</artifactId>
-    <version>${james.version}</version>
-    <scope>provided</scope>
-</dependency>
-
-        <dependency>
-            <groupId>org.apache.james</groupId>
-            <artifactId>apache-mailet-base</artifactId>
-            <scope>compile</scope>
-            <version>${james.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.james</groupId>
-            <artifactId>james-server-testing</artifactId>
-            <scope>test</scope>
-            <version>${james.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.james/james-core -->
-        <dependency>
-           <groupId>org.apache.james</groupId>
-           <artifactId>james-core</artifactId>
-           <version>3.8.2</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <!-- Compilatie plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>
-            </plugin>
-            
-            <!-- JAR packaging -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            
-            <!-- Resource filtering -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
-                <configuration>
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>xml</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <dependency>
+      <groupId>org.apache.james</groupId>
+      <artifactId>apache-mailet-base</artifactId>
+      <scope>compile</scope>
+      <version>${james.version}</version>
+    </dependency>
+  
+    <!-- Commons Configuration -->
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-crypto -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-configuration2</artifactId>
+      <version>${commons.configuration.version}</version>
+      <scope>provided</scope>
+    </dependency>
     
+    <!-- JavaMail (IMAP) -->
+    <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
+      <version>${javamail.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${org.slf4j.version}</version>
+    </dependency>
+      
+    <!-- Test dependencies -->  
+    <dependency>
+      <groupId>org.apache.james</groupId>
+      <artifactId>james-server-testing</artifactId>
+      <scope>test</scope>
+      <version>${james.version}</version>
+    </dependency>
+    
+    <!-- TestNG -->
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.4.0</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <!-- Mockito -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.12.4</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-testng</artifactId>
+      <version>2.0.9</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito2</artifactId>
+      <version>2.0.9</version>
+      <scope>test</scope>
+    </dependency>     
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Compilatie plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+      </plugin>
+      
+      <!-- JAR packaging -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      
+      <!-- Resource filtering -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.3.1</version>
+        <configuration>
+          <nonFilteredFileExtensions>
+            <nonFilteredFileExtension>xml</nonFilteredFileExtension>
+          </nonFilteredFileExtensions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
   <repositories>
-          <!-- Maven Central Repository -->
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        
+        <!-- Maven Central Repository -->
+      <repository>
+          <id>central</id>
+          <url>https://repo.maven.apache.org/maven2</url>
+          <snapshots>
+              <enabled>false</enabled>
+          </snapshots>
+      </repository>
+      
     <repository>
         <id>apache.snapshots</id>
         <name>Apache Snapshot Repository</name>

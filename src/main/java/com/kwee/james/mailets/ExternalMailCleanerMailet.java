@@ -51,17 +51,20 @@ public class ExternalMailCleanerMailet extends GenericMailet {
     }
   }
 
-  private void cleanExternalAccounts() throws Exception {
+  public void cleanExternalAccounts() throws Exception {
     File fetchmailFile = new File(jamesConfDir, "fetchmail.xml");
-    File encryptFile = new File(jamesConfDir, "encrypt.xml");
+    // File encryptFile = new File(jamesConfDir, "encrypt.xml");
 
     Configurations configs = new Configurations();
     XMLConfiguration fetchmailConfig = configs.xml(fetchmailFile);
-    XMLConfiguration encryptConfig = configs.xml(encryptFile);
+    // XMLConfiguration encryptConfig = configs.xml(encryptFile);
 
-    String masterPassword = encryptConfig.getString("masterPassword");
+    // String masterPassword = encryptConfig.getString("masterPassword");
+    String masterPassword = "";
 
-    List<HierarchicalConfiguration<ImmutableNode>> accounts = fetchmailConfig.configurationsAt("fetchmail");
+    // List<HierarchicalConfiguration<ImmutableNode>> accounts =
+    // fetchmailConfig.configurationsAt("fetchmail");
+    List<HierarchicalConfiguration<ImmutableNode>> accounts = fetchmailConfig.configurationsAt("fetch");
 
     for (HierarchicalConfiguration<ImmutableNode> account : accounts) {
       if (account.getBoolean("enabled", true)) {
@@ -86,7 +89,7 @@ public class ExternalMailCleanerMailet extends GenericMailet {
     }
   }
 
-  private void cleanImapAccount(String server, String user, String password, int daysOld) {
+  public void cleanImapAccount(String server, String user, String password, int daysOld) {
     try {
       Session session = Session.getInstance(System.getProperties());
       Store store = session.getStore("imaps");
@@ -141,4 +144,21 @@ public class ExternalMailCleanerMailet extends GenericMailet {
     }
   }
 
+  public void setInitParameter(String string, String string2) {
+    if (string.equalsIgnoreCase("dryrun")) {
+      if (string2.equalsIgnoreCase("true")) {
+        dryRun = true;
+      } else {
+        dryRun = false;
+      }
+    } else if (string.equalsIgnoreCase("jamesconfdir")) {
+      jamesConfDir = string2;
+    } else if (string.equalsIgnoreCase("defaultdaysold")) {
+      try {
+        defaultDaysOld = Integer.parseInt(getInitParameter(string2, "30"));
+      } catch (Exception e) {
+        defaultDaysOld = 30;
+      }
+    }
+  }
 }

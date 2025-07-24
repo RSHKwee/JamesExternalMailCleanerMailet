@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="5" passed="2" failed="3" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-07-24T17:57:46 CEST" name="Default suite" finished-at="2025-07-24T17:58:08 CEST" duration-ms="22486">
+    <groups>
+    </groups>
+    <test started-at="2025-07-24T17:57:46 CEST" name="Default test" finished-at="2025-07-24T17:58:08 CEST" duration-ms="22486">
+      <class name="com.kwee.james.mailets.ExternalMailCleanerMailetTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.kwee.james.mailets.ExternalMailCleanerMailetTest@35d019a3]" started-at="2025-07-24T17:57:46 CEST" name="setUp" finished-at="2025-07-24T17:57:47 CEST" duration-ms="725" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testCleanImapAccountDryRun()[pri:0, instance:com.kwee.james.mailets.ExternalMailCleanerMailetTest@35d019a3]" started-at="2025-07-24T17:57:47 CEST" name="testCleanImapAccountDryRun" finished-at="2025-07-24T17:58:08 CEST" duration-ms="21355" status="FAIL">
+          <exception class="java.lang.RuntimeException">
+            <message>
+              <![CDATA[Fout bij IMAP-operatie voor user@test.com]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.RuntimeException: Fout bij IMAP-operatie voor user@test.com
+at com.kwee.james.mailets.ExternalMailCleanerMailet.cleanImapAccount(ExternalMailCleanerMailet.java:113)
+at com.kwee.james.mailets.ExternalMailCleanerMailetTest.testCleanImapAccountDryRun(ExternalMailCleanerMailetTest.java:76)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+Caused by: com.sun.mail.util.MailConnectException: Couldn't connect to host, port: imap.test.com, 993; timeout -1;
+  nested exception is:
+java.net.ConnectException: Connection timed out: connect
+at com.sun.mail.imap.IMAPStore.protocolConnect(IMAPStore.java:740)
+at javax.mail.Service.connect(Service.java:366)
+at javax.mail.Service.connect(Service.java:246)
+at com.kwee.james.mailets.ExternalMailCleanerMailet.cleanImapAccount(ExternalMailCleanerMailet.java:93)
+... 27 more
+Caused by: java.net.ConnectException: Connection timed out: connect
+at java.base/sun.nio.ch.Net.connect0(Native Method)
+at java.base/sun.nio.ch.Net.connect(Net.java:589)
+at java.base/sun.nio.ch.Net.connect(Net.java:578)
+at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:583)
+at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+at java.base/java.net.Socket.connect(Socket.java:751)
+at java.base/java.net.Socket.connect(Socket.java:686)
+at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:359)
+at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:238)
+at com.sun.mail.iap.Protocol.<init>(Protocol.java:134)
+at com.sun.mail.imap.protocol.IMAPProtocol.<init>(IMAPProtocol.java:131)
+at com.sun.mail.imap.IMAPStore.newIMAPProtocol(IMAPStore.java:763)
+at com.sun.mail.imap.IMAPStore.protocolConnect(IMAPStore.java:698)
+... 30 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.RuntimeException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCleanImapAccountDryRun -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.kwee.james.mailets.ExternalMailCleanerMailetTest@35d019a3]" started-at="2025-07-24T17:58:08 CEST" name="setUp" finished-at="2025-07-24T17:58:08 CEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testCleanImapAccountShouldThrowOnConnectionFailure()[pri:0, instance:com.kwee.james.mailets.ExternalMailCleanerMailetTest@35d019a3]" started-at="2025-07-24T17:58:08 CEST" name="testCleanImapAccountShouldThrowOnConnectionFailure" finished-at="2025-07-24T17:58:08 CEST" duration-ms="23" status="FAIL">
+          <exception class="org.testng.TestException">
+            <message>
+              <![CDATA[
+Expected exception of type class javax.mail.MessagingException but got java.lang.RuntimeException: Fout bij IMAP-operatie voor user]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestException: 
+Expected exception of type class javax.mail.MessagingException but got java.lang.RuntimeException: Fout bij IMAP-operatie voor user
+at org.testng.internal.ExpectedExceptionsHolder.wrongException(ExpectedExceptionsHolder.java:68)
+at org.testng.internal.TestInvoker.considerExceptions(TestInvoker.java:739)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:634)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+Caused by: java.lang.RuntimeException: Fout bij IMAP-operatie voor user
+at com.kwee.james.mailets.ExternalMailCleanerMailet.cleanImapAccount(ExternalMailCleanerMailet.java:113)
+at com.kwee.james.mailets.ExternalMailCleanerMailetTest.testCleanImapAccountShouldThrowOnConnectionFailure(ExternalMailCleanerMailetTest.java:97)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+... 22 more
+Caused by: com.sun.mail.util.MailConnectException: Couldn't connect to host, port: invalid.server, 993; timeout -1;
+  nested exception is:
+java.net.UnknownHostException: invalid.server
+at com.sun.mail.imap.IMAPStore.protocolConnect(IMAPStore.java:740)
+at javax.mail.Service.connect(Service.java:366)
+at javax.mail.Service.connect(Service.java:246)
+at com.kwee.james.mailets.ExternalMailCleanerMailet.cleanImapAccount(ExternalMailCleanerMailet.java:93)
+... 27 more
+Caused by: java.net.UnknownHostException: invalid.server
+at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567)
+at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+at java.base/java.net.Socket.connect(Socket.java:751)
+at java.base/java.net.Socket.connect(Socket.java:686)
+at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:359)
+at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:238)
+at com.sun.mail.iap.Protocol.<init>(Protocol.java:134)
+at com.sun.mail.imap.protocol.IMAPProtocol.<init>(IMAPProtocol.java:131)
+at com.sun.mail.imap.IMAPStore.newIMAPProtocol(IMAPStore.java:763)
+at com.sun.mail.imap.IMAPStore.protocolConnect(IMAPStore.java:698)
+... 30 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCleanImapAccountShouldThrowOnConnectionFailure -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.kwee.james.mailets.ExternalMailCleanerMailetTest@35d019a3]" started-at="2025-07-24T17:58:08 CEST" name="setUp" finished-at="2025-07-24T17:58:08 CEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testDecryptPassword()[pri:0, instance:com.kwee.james.mailets.ExternalMailCleanerMailetTest@35d019a3]" started-at="2025-07-24T17:58:08 CEST" name="testDecryptPassword" finished-at="2025-07-24T17:58:08 CEST" duration-ms="9" status="FAIL">
+          <exception class="java.lang.reflect.InaccessibleObjectException">
+            <message>
+              <![CDATA[Unable to make private final native void java.lang.Object.wait0(long) throws java.lang.InterruptedException accessible: module java.base does not "opens java.lang" to unnamed module @4ac68d3e]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.reflect.InaccessibleObjectException: Unable to make private final native void java.lang.Object.wait0(long) throws java.lang.InterruptedException accessible: module java.base does not "opens java.lang" to unnamed module @4ac68d3e
+at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:391)
+at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:367)
+at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:315)
+at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:203)
+at java.base/java.lang.reflect.Method.setAccessible(Method.java:197)
+at org.powermock.reflect.internal.WhiteboxImpl.doGetAllMethods(WhiteboxImpl.java:1508)
+at org.powermock.reflect.internal.WhiteboxImpl.getAllMethods(WhiteboxImpl.java:1482)
+at org.powermock.reflect.internal.WhiteboxImpl.findMethodOrThrowException(WhiteboxImpl.java:862)
+at org.powermock.reflect.internal.WhiteboxImpl.doInvokeMethod(WhiteboxImpl.java:822)
+at org.powermock.reflect.internal.WhiteboxImpl.invokeMethod(WhiteboxImpl.java:690)
+at org.powermock.reflect.Whitebox.invokeMethod(Whitebox.java:401)
+at com.kwee.james.mailets.ExternalMailCleanerMailetTest.testDecryptPassword(ExternalMailCleanerMailetTest.java:90)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:794)
+at org.testng.TestRunner.run(TestRunner.java:596)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.reflect.InaccessibleObjectException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDecryptPassword -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.kwee.james.mailets.ExternalMailCleanerMailetTest@35d019a3]" started-at="2025-07-24T17:58:08 CEST" name="setUp" finished-at="2025-07-24T17:58:08 CEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testInitShouldSetDefaultValues()[pri:0, instance:com.kwee.james.mailets.ExternalMailCleanerMailetTest@35d019a3]" started-at="2025-07-24T17:58:08 CEST" name="testInitShouldSetDefaultValues" finished-at="2025-07-24T17:58:08 CEST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testInitShouldSetDefaultValues -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.kwee.james.mailets.ExternalMailCleanerMailetTest@35d019a3]" started-at="2025-07-24T17:58:08 CEST" name="setUp" finished-at="2025-07-24T17:58:08 CEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testServiceShouldNotThrowWithValidInput()[pri:0, instance:com.kwee.james.mailets.ExternalMailCleanerMailetTest@35d019a3]" started-at="2025-07-24T17:58:08 CEST" name="testServiceShouldNotThrowWithValidInput" finished-at="2025-07-24T17:58:08 CEST" duration-ms="335" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testServiceShouldNotThrowWithValidInput -->
+      </class> <!-- com.kwee.james.mailets.ExternalMailCleanerMailetTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
