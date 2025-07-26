@@ -1,13 +1,11 @@
 <?xml version="1.0"?>   
 <fetchmail enabled="true">
    <jmxName>fetchmail</jmxName>   
-   <!-- cym.kwee accounts -->
-   <!-- cym.kwee@hccnet.nl -->
-   <fetch name="cym.kwee.hccnet.nl">
+   <fetch name="aap.noot.mies.nl">
       <accounts>
-         <account user="cym.kwee@hccnet.nl" password="8C2h7k37" recipient="corianne@kwee.cumail.nl" ignorercpt-header="true"/>
+         <account user="aap.noot@mies.nl" password="8C2h7k37" recipient="aap@noot.heide.nl" ignorercpt-header="true"/>
       </accounts>
-      <host>pop.hccnet.nl</host>
+      <host>pop.mies.nl</host>
       <interval>600000</interval>
       <javaMailProviderName>imap</javaMailProviderName>
       <javaMailFolderName>INBOX</javaMailFolderName>
@@ -16,7 +14,7 @@
       </javaMailProperties>
       <fetchall>true</fetchall>
       <recursesubfolders>true</recursesubfolders>
-      <defaultdomain>kwee.cumail.nl</defaultdomain>
+      <defaultdomain>noot.heide.nl</defaultdomain>
       <fetched leaveonserver="true" markseen="false"/>
       <remotereceivedheader index="1" reject="true" leaveonserver="true" markseen="false"/>
       <maxmessagesize limit="0" reject="false" leaveonserver="true" markseen="false"/>
@@ -24,85 +22,7 @@
       <recipientnotfound defer="true" reject="true" leaveonserver="true" markseen="false"/>
       <blacklist reject="true" leaveonserver="true" markseen="false"> wibble@localhost, flobble@localhost</blacklist>
       <userundefined reject="true" leaveonserver="true" markseen="false" />
-      <remoterecipient reject="false" leaveonserver="true" markseen="false">postmaster@kwee.cumail.nl</remoterecipient>
+      <remoterecipient reject="false" leaveonserver="true" markseen="false">postmaster@noot.heide.nl</remoterecipient>
    </fetch>   
-   
-   <!-- cym.kwee@gmail.com -->
-   <fetch name="cym.gmail.com">
-      <accounts>
-         <account user="cym.kwee@gmail.com" password="ycgapizqflbgaibe" recipient="corianne@kwee.cumail.nl" ignorercpt-header="true"/>
-      </accounts>
-      <host>imap.gmail.com</host>
-      <interval>600000</interval>
-      <javaMailProviderName>imap</javaMailProviderName>
-      <javaMailFolderName>INBOX</javaMailFolderName>
-      <javaMailProperties>
-         <property name="mail.imap.ssl.enable" value="true"/>
-      </javaMailProperties>
-      <fetchall>true</fetchall>
-      <recursesubfolders>true</recursesubfolders>
-      <defaultdomain>kwee.cumail.nl</defaultdomain>
-      <fetched leaveonserver="true" markseen="false"/>
-      <remotereceivedheader index="1" reject="true" leaveonserver="true" markseen="false"/>
-      <maxmessagesize limit="0" reject="false" leaveonserver="true" markseen="false"/>
-      <undeliverable leaveonserver="true" markseen="false"/>
-      <recipientnotfound defer="true" reject="true" leaveonserver="true" markseen="false"/>
-      <blacklist reject="true" leaveonserver="true" markseen="false"> wibble@localhost, flobble@localhost</blacklist>
-      <userundefined reject="true" leaveonserver="true" markseen="false" />
-      <remoterecipient reject="false" leaveonserver="true" markseen="false">postmaster@kwee.cumail.nl</remoterecipient>
-      <daysOld>90</daysOld> <!-- Account-specifieke instelling -->
-   </fetch>
- 
-   <!-- cymkwee@yahoo.com -->
-   <fetch name="cymkwee">
-      <accounts>
-         <account user="cymkwee" password="bnxbofiqwoxebhul" recipient="corianne@kwee.cumail.nl" ignorercpt-header="true"/>
-      </accounts>
-      <host>imap.mail.yahoo.com</host>
-      <interval>600000</interval>
-      <javaMailProviderName>imap</javaMailProviderName>
-      <javaMailFolderName>INBOX</javaMailFolderName>
-      <javaMailProperties>
-         <property name="mail.imap.ssl.enable" value="true"/>
-      </javaMailProperties>
-      <fetchall>true</fetchall>
-      <recursesubfolders>true</recursesubfolders>
-      <defaultdomain>kwee.cumail.nl</defaultdomain>
-      <fetched leaveonserver="true" markseen="false"/>
-      <remotereceivedheader index="1" reject="true" leaveonserver="true" markseen="false"/>
-      <maxmessagesize limit="0" reject="false" leaveonserver="true" markseen="false"/>
-      <undeliverable leaveonserver="true" markseen="false"/>
-      <recipientnotfound defer="true" reject="true" leaveonserver="true" markseen="false"/>
-      <blacklist reject="true" leaveonserver="true" markseen="false"> wibble@localhost, flobble@localhost</blacklist>
-      <userundefined reject="true" leaveonserver="true" markseen="false" />
-      <remoterecipient reject="false" leaveonserver="true" markseen="false">postmaster@kwee.cumail.nl</remoterecipient>
-      <daysOld>90</daysOld> <!-- Account-specifieke instelling -->
-   </fetch>
- 
-    <!-- corianne.kwee@kpnmail.nl -->
-   <fetch name="corianne.kwee.kpnmail.nl">
-      <accounts>
-         <account user="corianne.kwee@kpnmail.nl" password="Baracuda" recipient="corianne@kwee.cumail.nl" ignorercpt-header="true"/>
-      </accounts>
-      <host>pop.kpnmail.nl</host>
-      <interval>600000</interval>
-      <javaMailProviderName>imap</javaMailProviderName>
-      <javaMailFolderName>INBOX</javaMailFolderName>
-      <javaMailProperties>
-         <property name="mail.imap.ssl.enable" value="true"/>
-      </javaMailProperties>
-      <fetchall>true</fetchall>
-      <recursesubfolders>true</recursesubfolders>
-      <defaultdomain>kwee.cumail.nl</defaultdomain>
-      <fetched leaveonserver="true" markseen="false"/>
-      <remotereceivedheader index="1" reject="true" leaveonserver="true" markseen="false"/>
-      <maxmessagesize limit="0" reject="false" leaveonserver="true" markseen="false"/>
-      <undeliverable leaveonserver="true" markseen="false"/>
-      <recipientnotfound defer="true" reject="true" leaveonserver="true" markseen="false"/>
-      <blacklist reject="true" leaveonserver="true" markseen="false"> wibble@localhost, flobble@localhost</blacklist>
-      <userundefined reject="true" leaveonserver="true" markseen="false" />
-      <remoterecipient reject="false" leaveonserver="true" markseen="false">postmaster@kwee.cumail.nl</remoterecipient>
-      <daysOld>90</daysOld> <!-- Account-specifieke instelling -->
-   </fetch>
 
 </fetchmail>       

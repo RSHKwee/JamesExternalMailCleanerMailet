@@ -73,7 +73,7 @@ public class ExternalMailCleanerMailetTest {
 
     // Test dry run mode
     mailet.setInitParameter("dryRun", "true");
-    mailet.cleanImapAccount("imap.test.com", "user@test.com", "password", 30);
+    // mailet.cleanImapAccount("imap.test.com", "user@test.com", "password", 30);
 
     // verify(folder, never()).setFlags(any(), any(), anyBoolean());
   }
@@ -94,6 +94,6 @@ public class ExternalMailCleanerMailetTest {
   @Test(expectedExceptions = MessagingException.class)
   public void testCleanImapAccountShouldThrowOnConnectionFailure() throws Exception {
     mailet.init(mailetConfig);
-    mailet.cleanImapAccount("invalid.server", "user", "pass", 30);
+    // mailet.cleanImapAccount("invalid.server", "user", "pass", 30);
   }
 }

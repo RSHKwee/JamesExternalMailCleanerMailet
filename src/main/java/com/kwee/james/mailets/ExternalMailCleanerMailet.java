@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.mail.Flags;
 import javax.mail.Folder;
@@ -19,7 +20,6 @@ import org.apache.commons.configuration2.HierarchicalConfiguration;
 import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.tree.ImmutableNode;
-//import org.apache.james.protocols.lib.PasswordUtil;
 //import org.apache.james.util.encrypt.OpenSSL;
 import org.apache.mailet.Mail;
 import org.apache.mailet.MailetException;
@@ -46,7 +46,7 @@ public class ExternalMailCleanerMailet extends GenericMailet {
     try {
       cleanExternalAccounts();
     } catch (Exception e) {
-      LOGGER.info("Fout bij opschonen externe accounts: " + e.getMessage());
+      LOGGER.info("Error cleaning external accounts: " + e.getMessage());
       e.printStackTrace();
     }
   }
@@ -62,58 +62,75 @@ public class ExternalMailCleanerMailet extends GenericMailet {
     // String masterPassword = encryptConfig.getString("masterPassword");
     String masterPassword = "";
 
-    // List<HierarchicalConfiguration<ImmutableNode>> accounts =
-    // fetchmailConfig.configurationsAt("fetchmail");
-    List<HierarchicalConfiguration<ImmutableNode>> accounts = fetchmailConfig.configurationsAt("fetch");
+    if (!fetchmailConfig.getBoolean("fetchmail.enabled", true)) {
+      LOGGER.info("Fetchmail is disabled in configuration");
+      return;
+    }
+
+    // List<HierarchicalConfiguration<ImmutableNode>> servers =
+    // fetchmailConfig.configurationsAt("fetch.accounts");
+    List<HierarchicalConfiguration<ImmutableNode>> servers = fetchmailConfig.configurationsAt("fetch");
+
+    for (HierarchicalConfiguration<ImmutableNode> server : servers) {
+      cleanServerAccounts(server, masterPassword);
+    }
+  }
+
+  private void cleanServerAccounts(HierarchicalConfiguration<ImmutableNode> server, String masterPassword) {
+    String host = server.getString("host");
+    String protocol = server.getString("javaMailProviderName", "imap");
+    String folderName = server.getString("javaMailFolderName", "INBOX");
+
+    // Process JavaMail properties
+    Properties mailProps = new Properties();
+    List<HierarchicalConfiguration<ImmutableNode>> props = server.configurationsAt("javaMailProperties.property");
+    for (HierarchicalConfiguration<ImmutableNode> prop : props) {
+      mailProps.setProperty(prop.getString("[@name]"), prop.getString("[@value]"));
+    }
+
+    List<HierarchicalConfiguration<ImmutableNode>> accounts = server.configurationsAt("accounts.account");
 
     for (HierarchicalConfiguration<ImmutableNode> account : accounts) {
-      if (account.getBoolean("enabled", true)) {
-        cleanAccount(account, masterPassword);
+      String user = account.getString("[@user]");
+      String encryptedPass = account.getString("[@password]");
+      int daysOld = account.getInt("[@daysOld]", defaultDaysOld);
+
+      try {
+        // String password = new OpenSSL(masterPassword).decrypt(encryptedPass);
+        String password = "";
+        cleanAccount(host, protocol, folderName, mailProps, user, password, daysOld);
+      } catch (Exception e) {
+        LOGGER.info("Error processing account " + user + ": " + e.getMessage());
       }
     }
   }
 
-  private void cleanAccount(HierarchicalConfiguration<ImmutableNode> account, String masterPassword) {
-    String server = account.getString("server");
-    String user = account.getString("userid");
-    String encryptedPass = account.getString("password");
-    int daysOld = account.getInt("daysOld", defaultDaysOld);
-
+  private void cleanAccount(String host, String protocol, String folderName, Properties mailProps, String user,
+      String password, int daysOld) {
     try {
-      // TODO
-      // String password = DecryptWrapper.decrypt(encryptedPass, masterPassword);
-      String password = encryptedPass;
-      cleanImapAccount(server, user, password, daysOld);
-    } catch (Exception e) {
-      LOGGER.info("Fout bij account " + user + ": " + e.getMessage());
-    }
-  }
+      Session session = Session.getInstance(mailProps);
+      Store store = session.getStore(protocol);
+      store.connect(host, user, password);
 
-  public void cleanImapAccount(String server, String user, String password, int daysOld) {
-    try {
-      Session session = Session.getInstance(System.getProperties());
-      Store store = session.getStore("imaps");
-      store.connect(server, user, password);
-
-      Folder inbox = store.getFolder("INBOX");
-      inbox.open(Folder.READ_WRITE);
+      Folder folder = store.getFolder(folderName);
+      folder.open(Folder.READ_WRITE);
 
       Date cutoffDate = Date.from(LocalDate.now().minusDays(daysOld).atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-      Message[] messages = inbox.search(new ReceivedDateTerm(ComparisonTerm.LT, cutoffDate));
+      Message[] messages = folder.search(new ReceivedDateTerm(ComparisonTerm.LT, cutoffDate));
 
       if (dryRun) {
-        LOGGER.info("DRY RUN: " + messages.length + " berichten gevonden voor verwijdering in " + user);
+        LOGGER.info("DRY RUN: Would delete " + messages.length + " messages for " + user);
       } else {
-        inbox.setFlags(messages, new Flags(Flags.Flag.DELETED), true);
-        inbox.expunge();
-        LOGGER.info("Verwijderd: " + messages.length + " berichten van " + user);
+        folder.setFlags(messages, new Flags(Flags.Flag.DELETED), true);
+        folder.expunge();
+        LOGGER.info("Deleted " + messages.length + " messages for " + user);
       }
 
-      inbox.close(false);
+      folder.close(false);
       store.close();
     } catch (Exception e) {
-      throw new RuntimeException("Fout bij IMAP-operatie voor " + user, e);
+      throw new RuntimeException("Error cleaning account " + user, e);
     }
   }
 
@@ -121,27 +138,6 @@ public class ExternalMailCleanerMailet extends GenericMailet {
   public String getInitParameter(String name, String defaultValue) {
     String value = getInitParameter(name);
     return (value != null) ? value : defaultValue;
-  }
-
-  private static class ReceivedDateTerm extends DateTerm {
-    /**
-    * 
-    */
-    private static final long serialVersionUID = -4107976014340562208L;
-
-    public ReceivedDateTerm(int comparison, Date date) {
-      super(comparison, date);
-    }
-
-    @Override
-    public boolean match(Message message) {
-      try {
-        Date receivedDate = message.getReceivedDate();
-        return (receivedDate != null) && super.match(receivedDate);
-      } catch (MessagingException e) {
-        return false;
-      }
-    }
   }
 
   public void setInitParameter(String string, String string2) {
@@ -158,6 +154,24 @@ public class ExternalMailCleanerMailet extends GenericMailet {
         defaultDaysOld = Integer.parseInt(getInitParameter(string2, "30"));
       } catch (Exception e) {
         defaultDaysOld = 30;
+      }
+    }
+  }
+
+  private static class ReceivedDateTerm extends DateTerm {
+    private static final long serialVersionUID = -4107976014340562208L;
+
+    public ReceivedDateTerm(int comparison, Date date) {
+      super(comparison, date);
+    }
+
+    @Override
+    public boolean match(Message message) {
+      try {
+        Date receivedDate = message.getReceivedDate();
+        return (receivedDate != null) && super.match(receivedDate);
+      } catch (MessagingException e) {
+        return false;
       }
     }
   }
