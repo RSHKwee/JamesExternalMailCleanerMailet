@@ -1,6 +1,5 @@
 package com.kwee.james.mailets;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -33,6 +32,7 @@ public class ExternalMailCleanerMailet extends GenericMailet {
   private String jamesConfDir;
   private int defaultDaysOld;
   private boolean dryRun;
+  private String fetchmailFile = "fetchmail.xml";
 
   @Override
   public void init() throws MailetException {
@@ -52,28 +52,22 @@ public class ExternalMailCleanerMailet extends GenericMailet {
   }
 
   public void cleanExternalAccounts() throws Exception {
-    File fetchmailFile = new File(jamesConfDir, "fetchmail.xml");
-    // File encryptFile = new File(jamesConfDir, "encrypt.xml");
+    // Laad configuratie
+    XMLConfiguration config = new Configurations().xml(jamesConfDir + "/" + fetchmailFile);
 
-    Configurations configs = new Configurations();
-    XMLConfiguration fetchmailConfig = configs.xml(fetchmailFile);
-    // XMLConfiguration encryptConfig = configs.xml(encryptFile);
+    // Verwerk alle fetch-blokken
+    config.configurationsAt("fetch").forEach(fetchNode -> {
+      FetchMailConfig fetchConfig = FetchMailConfig.fromXml(fetchNode);
 
-    // String masterPassword = encryptConfig.getString("masterPassword");
-    String masterPassword = "";
-
-    if (!fetchmailConfig.getBoolean("fetchmail.enabled", true)) {
-      LOGGER.info("Fetchmail is disabled in configuration");
-      return;
-    }
-
-    // List<HierarchicalConfiguration<ImmutableNode>> servers =
-    // fetchmailConfig.configurationsAt("fetch.accounts");
-    List<HierarchicalConfiguration<ImmutableNode>> servers = fetchmailConfig.configurationsAt("fetch");
-
-    for (HierarchicalConfiguration<ImmutableNode> server : servers) {
-      cleanServerAccounts(server, masterPassword);
-    }
+      // Verwerk accounts
+      fetchConfig.getAccounts().forEach(account -> {
+        // Maak verbinding en verwijder oude mails
+        cleanAccount(fetchConfig.getHost(), fetchConfig.getJavaMailProviderName(), fetchConfig.getJavaMailFolderName(),
+            fetchConfig.getJavaMailProperties(), account.getUser(),
+//            decryptPassword(account.getPassword(), masterPassword), account.getDaysOld());
+            account.getPassword(), account.getDaysOld());
+      });
+    });
   }
 
   private void cleanServerAccounts(HierarchicalConfiguration<ImmutableNode> server, String masterPassword) {
