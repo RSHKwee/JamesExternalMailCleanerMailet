@@ -25,7 +25,7 @@ public class TestMailCleanerMailet {
         .mailetContext(mailetContext)
         .setProperty("jamesConfDir", "F:\\dev\\James Mailets\\ExternalMailCleaner\\src\\test\\resources")
         .setProperty("dryRun", "true")
-        .setProperty("defaultDaysOld", "30")
+        .setProperty("defaultDaysOld", "0")
         .build();
     //@formatter:on
 

@@ -50,7 +50,7 @@
       <blacklist reject="true" leaveonserver="true" markseen="false"> wibble@localhost, flobble@localhost</blacklist>
       <userundefined reject="true" leaveonserver="true" markseen="false" />
       <remoterecipient reject="false" leaveonserver="true" markseen="false">postmaster@kwee.cumail.nl</remoterecipient>
-      <daysOld>90</daysOld> <!-- Account-specifieke instelling -->
+      <daysOld>91</daysOld> <!-- Account-specifieke instelling -->
    </fetch>
  
    <!-- cymkwee@yahoo.com -->
@@ -76,7 +76,7 @@
       <blacklist reject="true" leaveonserver="true" markseen="false"> wibble@localhost, flobble@localhost</blacklist>
       <userundefined reject="true" leaveonserver="true" markseen="false" />
       <remoterecipient reject="false" leaveonserver="true" markseen="false">postmaster@kwee.cumail.nl</remoterecipient>
-      <daysOld>90</daysOld> <!-- Account-specifieke instelling -->
+      <daysOld>92</daysOld> <!-- Account-specifieke instelling -->
    </fetch>
  
     <!-- corianne.kwee@kpnmail.nl -->
@@ -102,7 +102,7 @@
       <blacklist reject="true" leaveonserver="true" markseen="false"> wibble@localhost, flobble@localhost</blacklist>
       <userundefined reject="true" leaveonserver="true" markseen="false" />
       <remoterecipient reject="false" leaveonserver="true" markseen="false">postmaster@kwee.cumail.nl</remoterecipient>
-      <daysOld>90</daysOld> <!-- Account-specifieke instelling -->
+      <daysOld>93</daysOld> <!-- Account-specifieke instelling -->
    </fetch>
 
 </fetchmail>       

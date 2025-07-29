@@ -33,12 +33,13 @@ public class ExternalMailCleanerMailet extends GenericMailet {
   private int defaultDaysOld;
   private boolean dryRun;
   private String fetchmailFile = "fetchmail.xml";
+  private int port = 993;
 
   @Override
   public void init() throws MailetException {
     jamesConfDir = getInitParameter("jamesConfDir", "/opt/james/conf");
-    defaultDaysOld = Integer.parseInt(getInitParameter("defaultDaysOld", "30"));
-    dryRun = Boolean.parseBoolean(getInitParameter("dryRun", "false"));
+    defaultDaysOld = Integer.parseInt(getInitParameter("defaultDaysOld", "0"));
+    dryRun = Boolean.parseBoolean(getInitParameter("dryRun", "true"));
   }
 
   @Override
@@ -61,11 +62,23 @@ public class ExternalMailCleanerMailet extends GenericMailet {
 
       // Verwerk accounts
       fetchConfig.getAccounts().forEach(account -> {
-        // Maak verbinding en verwijder oude mails
-        cleanAccount(fetchConfig.getHost(), fetchConfig.getJavaMailProviderName(), fetchConfig.getJavaMailFolderName(),
-            fetchConfig.getJavaMailProperties(), account.getUser(),
+        // 1. Eigenschappen instellen voor IMAPS
+        Properties properties = new Properties(fetchConfig.getJavaMailProperties());
+        properties.put("mail.imap.host", fetchConfig.getHost());
+        properties.put("mail.imap.port", port);
+        properties.put("mail.imap.ssl.enable", "true");
+        properties.put("mail.imap.auth", "true");
+        properties.put("mail.imap.starttls.enable", "true");
+        properties.put("mail.imap.ssl.protocols", "TLSv1.2");
+        int daysold = account.getDaysOld();
+
+        if (daysold > 0) {
+          // Maak verbinding en verwijder oude mails
+          cleanAccount(fetchConfig.getHost(), fetchConfig.getJavaMailProviderName(),
+              fetchConfig.getJavaMailFolderName(), fetchConfig.getJavaMailProperties(), account.getUser(),
 //            decryptPassword(account.getPassword(), masterPassword), account.getDaysOld());
-            account.getPassword(), account.getDaysOld());
+              account.getPassword(), account.getDaysOld());
+        }
       });
     });
   }

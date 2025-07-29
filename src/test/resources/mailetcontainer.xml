@@ -1,6 +1,6 @@
 <mailet match="All" class="org.apache.james.mailets.custom.ExternalMailCleanerMailet">
   <!-- Optionele parameters (standaardwaarden worden gebruikt indien niet opgegeven) -->
   <jamesConfDir>/src/test/resources</jamesConfDir>
-  <defaultDaysOld>60</defaultDaysOld>
+  <defaultDaysOld>0</defaultDaysOld>
   <dryRun>true</dryRun>
 </mailet>
