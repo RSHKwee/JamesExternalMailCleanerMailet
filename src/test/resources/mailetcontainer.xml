@@ -1,6 +1,8 @@
-<mailet match="All" class="org.apache.james.mailets.custom.ExternalMailCleanerMailet">
+<mailet match="All" class="org.apache.james.mailets.Kwee.ExternalMailCleanerMailet">
   <!-- Optionele parameters (standaardwaarden worden gebruikt indien niet opgegeven) -->
   <jamesConfDir>/src/test/resources</jamesConfDir>
   <defaultDaysOld>0</defaultDaysOld>
   <dryRun>true</dryRun>
+  <archiveFolder>Oude_Emails</archiveFolder>
+  <deleteOriginals>false</deleteOriginals>   <!-- Of origineel verwijderen -->
 </mailet>

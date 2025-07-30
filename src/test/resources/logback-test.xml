@@ -37,11 +37,15 @@
     </root>
 
     <!-- Specific Logger with different level -->
-    <logger name="com.kwee.james.mailets" level="DEBUG" additivity="false">
+    <logger name="org.apache.james.mailets.Kwee" level="INFO" additivity="false">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="ASYNC_FILE" />
     </logger>
-
+    
+    <logger name="sandbox" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ASYNC_FILE" />
+    </logger>
     <!-- Shutdown hook to ensure logs are flushed on JVM exit -->
     <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
 </configuration>

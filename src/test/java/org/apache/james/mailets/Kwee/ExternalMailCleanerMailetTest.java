@@ -1,4 +1,4 @@
-package com.kwee.james.mailets;
+package org.apache.james.mailets.Kwee;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -14,7 +14,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.configuration2.HierarchicalConfiguration;
 import org.apache.commons.configuration2.tree.ImmutableNode;
-//import org.apache.james.util.encrypt.OpenSSL;
 import org.apache.mailet.Mail;
 import org.apache.mailet.MailetContext;
 import org.apache.mailet.base.test.FakeMailetConfig;
@@ -94,6 +93,7 @@ public class ExternalMailCleanerMailetTest {
   @Test(expectedExceptions = MessagingException.class)
   public void testCleanImapAccountShouldThrowOnConnectionFailure() throws Exception {
     mailet.init(mailetConfig);
-    // mailet.cleanImapAccount("invalid.server", "user", "pass", 30);
+    mailet.service(null);
+//    mailet.cleanImapAccount("invalid.server", "user", "pass", 30);
   }
 }

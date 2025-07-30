@@ -1,4 +1,4 @@
-package com.kwee.james.mailets;
+package org.apache.james.mailets.Kwee;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,13 @@ import java.util.Properties;
 import org.apache.commons.configuration2.HierarchicalConfiguration;
 import org.apache.commons.configuration2.tree.ImmutableNode;
 
+/**
+ * Load FetchMail.xml into a Java class.
+ */
 public class FetchMailConfig {
+  /**
+   * 
+   */
   private String name;
   private String host;
   private long interval;
@@ -27,14 +33,16 @@ public class FetchMailConfig {
   private BlacklistConfig blacklist;
   private UserUndefinedConfig userUndefined;
   private RemoteRecipientConfig remoteRecipient;
+  private int daysOld;
 
-  // Account configuratie
+  /**
+   * Account configuration
+   */
   public static class Account {
     private String user;
     private String password;
     private String recipient;
     private boolean ignoreRcptHeader;
-    private int daysOld;
 
     public String getUser() {
       return user;
@@ -67,17 +75,11 @@ public class FetchMailConfig {
     public void setIgnoreRcptHeader(boolean ignoreRcptHeader) {
       this.ignoreRcptHeader = ignoreRcptHeader;
     }
-
-    public int getDaysOld() {
-      return daysOld;
-    }
-
-    public void setDaysOld(int daysOld) {
-      this.daysOld = daysOld;
-    }
   }
 
-  // Configuratieblokken
+  /**
+   * Configuration parts
+   */
   public static class FetchedConfig {
     private boolean leaveOnServer;
     private boolean markSeen;
@@ -345,7 +347,9 @@ public class FetchMailConfig {
     }
   }
 
-  // Getters en setters voor hoofdklasse
+  /**
+   * Getters and setters for Main part
+   */
   public String getName() {
     return name;
   }
@@ -416,6 +420,14 @@ public class FetchMailConfig {
 
   public void setDefaultDomain(String defaultDomain) {
     this.defaultDomain = defaultDomain;
+  }
+
+  public int getDaysOld() {
+    return daysOld;
+  }
+
+  public void setDaysOld(int daysOld) {
+    this.daysOld = daysOld;
   }
 
   public List<Account> getAccounts() {
@@ -494,8 +506,22 @@ public class FetchMailConfig {
     this.remoteRecipient = remoteRecipient;
   }
 
-  // XML Parsing methode
+  /**
+   * XML Parsing methods
+   * 
+   * @param config
+   * @param a_defaultDays
+   * @return
+   */
+  public static FetchMailConfig fromXml(HierarchicalConfiguration<ImmutableNode> config, int a_defaultDays) {
+    return fromXmlLocal(config, a_defaultDays);
+  }
+
   public static FetchMailConfig fromXml(HierarchicalConfiguration<ImmutableNode> config) {
+    return fromXmlLocal(config, -1); // Default Days old -1, keep messages.
+  }
+
+  private static FetchMailConfig fromXmlLocal(HierarchicalConfiguration<ImmutableNode> config, int defaultDaysOld) {
     FetchMailConfig fetchConfig = new FetchMailConfig();
     fetchConfig.setName(config.getString("[@name]", ""));
     fetchConfig.setHost(config.getString("host", ""));
@@ -505,6 +531,7 @@ public class FetchMailConfig {
     fetchConfig.setFetchAll(config.getBoolean("fetchall", true));
     fetchConfig.setRecurseSubfolders(config.getBoolean("recursesubfolders", false));
     fetchConfig.setDefaultDomain(config.getString("defaultdomain", ""));
+    fetchConfig.setDaysOld(config.getInt("daysOld", defaultDaysOld)); // Default -1 dagen, oftewel altijd bewaren...
 
     // Parse JavaMail properties
     Properties mailProps = new Properties();
@@ -522,7 +549,6 @@ public class FetchMailConfig {
       account.setPassword(accConfig.getString("[@password]", ""));
       account.setRecipient(accConfig.getString("[@recipient]", ""));
       account.setIgnoreRcptHeader(accConfig.getBoolean("[@ignorercpt-header]", false));
-      account.setDaysOld(accConfig.getInt("[@daysOld]", 30)); // Default 30 dagen
       fetchConfig.addAccount(account);
     }
 
@@ -562,7 +588,9 @@ public class FetchMailConfig {
     return fetchConfig;
   }
 
-  // Parsers voor configuratieblokken
+  /**
+   * Parsers for configuration parts
+   */
   private static FetchedConfig parseFetchedConfig(HierarchicalConfiguration<ImmutableNode> config) {
     FetchedConfig fetched = new FetchedConfig();
     fetched.setLeaveOnServer(config.getBoolean("[@leaveonserver]", true));
