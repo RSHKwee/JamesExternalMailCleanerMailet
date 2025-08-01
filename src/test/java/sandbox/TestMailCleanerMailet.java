@@ -4,7 +4,7 @@ import static org.mockito.Mockito.mock;
 
 import java.io.IOException;
 
-import org.apache.james.mailets.Kwee.ExternalMailCleanerMailet;
+import org.apache.james.mailets.kwee.ExternalMailCleanerMailet;
 import org.apache.mailet.MailetConfig;
 import org.apache.mailet.MailetContext;
 import org.apache.mailet.base.test.FakeMailetConfig;

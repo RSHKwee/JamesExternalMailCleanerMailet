@@ -1,4 +1,4 @@
-package org.apache.james.mailets.Kwee;
+package org.apache.james.mailets.kwee;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

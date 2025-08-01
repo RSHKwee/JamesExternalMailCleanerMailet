@@ -1,4 +1,4 @@
-package org.apache.james.mailets.Kwee;
+package org.apache.james.mailets.kwee;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;

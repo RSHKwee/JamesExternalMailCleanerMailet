@@ -3,14 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.kwee.james.mailets.ExternalMailCleanerMailetTest">
+      <class name="org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest">
         <methods>
           <include name="setUp"/>
           <include name="testDecryptPassword"/>
-          <include name="testCleanImapAccountDryRun"/>
           <include name="testCleanImapAccountShouldThrowOnConnectionFailure"/>
         </methods>
-      </class> <!-- com.kwee.james.mailets.ExternalMailCleanerMailetTest -->
+      </class> <!-- org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

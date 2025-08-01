@@ -26,7 +26,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 3 failed tests</span>
+      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -51,7 +51,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>G:\Users\René\AppData\Local\Temp\testng-eclipse-249947601\testng-customsuite.xml</span>
+                    <span>G:\Users\René\AppData\Local\Temp\testng-eclipse--1801391492\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -93,7 +93,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">5 methods, 3 failed,   2 passed</span>
+                    <span class="method-stats">5 methods, 2 failed,   3 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -104,17 +104,12 @@
                     <div class="method-list-content failed suite-Default_suite">
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.kwee.james.mailets.ExternalMailCleanerMailetTest" class="method navigator-link" hash-for-method="testCleanImapAccountDryRun">testCleanImapAccountDryRun</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest" class="method navigator-link" hash-for-method="testCleanImapAccountShouldThrowOnConnectionFailure">testCleanImapAccountShouldThrowOnConnectionFailure</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.kwee.james.mailets.ExternalMailCleanerMailetTest" class="method navigator-link" hash-for-method="testCleanImapAccountShouldThrowOnConnectionFailure">testCleanImapAccountShouldThrowOnConnectionFailure</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.kwee.james.mailets.ExternalMailCleanerMailetTest" class="method navigator-link" hash-for-method="testDecryptPassword">testDecryptPassword</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest" class="method navigator-link" hash-for-method="testDecryptPassword">testDecryptPassword</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
@@ -128,12 +123,17 @@
                     <div class="method-list-content passed suite-Default_suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.kwee.james.mailets.ExternalMailCleanerMailetTest" class="method navigator-link" hash-for-method="testInitShouldSetDefaultValues">testInitShouldSetDefaultValues</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest" class="method navigator-link" hash-for-method="testCleanImapAccountDryRun">testCleanImapAccountDryRun</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.kwee.james.mailets.ExternalMailCleanerMailetTest" class="method navigator-link" hash-for-method="testServiceShouldNotThrowWithValidInput">testServiceShouldNotThrowWithValidInput</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest" class="method navigator-link" hash-for-method="testInitShouldSetDefaultValues">testInitShouldSetDefaultValues</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest" class="method navigator-link" hash-for-method="testServiceShouldNotThrowWithValidInput">testServiceShouldNotThrowWithValidInput</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Default_suite -->
@@ -151,79 +151,18 @@
           <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
               <img src="failed.png"/>
-              <span class="class-name">com.kwee.james.mailets.ExternalMailCleanerMailetTest</span>
+              <span class="class-name">org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="testCleanImapAccountDryRun">
-                  </a> <!-- testCleanImapAccountDryRun -->
-                  <span class="method-name">testCleanImapAccountDryRun</span>
-                  <div class="stack-trace">java.lang.RuntimeException: Fout bij IMAP-operatie voor user@test.com
-	at com.kwee.james.mailets.ExternalMailCleanerMailet.cleanImapAccount(ExternalMailCleanerMailet.java:113)
-	at com.kwee.james.mailets.ExternalMailCleanerMailetTest.testCleanImapAccountDryRun(ExternalMailCleanerMailetTest.java:76)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at org.testng.TestRunner.privateRun(TestRunner.java:794)
-	at org.testng.TestRunner.run(TestRunner.java:596)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-	at org.testng.TestNG.runSuites(TestNG.java:1063)
-	at org.testng.TestNG.run(TestNG.java:1031)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-Caused by: com.sun.mail.util.MailConnectException: Couldn&apos;t connect to host, port: imap.test.com, 993; timeout -1;
-  nested exception is:
-	java.net.ConnectException: Connection timed out: connect
-	at com.sun.mail.imap.IMAPStore.protocolConnect(IMAPStore.java:740)
-	at javax.mail.Service.connect(Service.java:366)
-	at javax.mail.Service.connect(Service.java:246)
-	at com.kwee.james.mailets.ExternalMailCleanerMailet.cleanImapAccount(ExternalMailCleanerMailet.java:93)
-	... 27 more
-Caused by: java.net.ConnectException: Connection timed out: connect
-	at java.base/sun.nio.ch.Net.connect0(Native Method)
-	at java.base/sun.nio.ch.Net.connect(Net.java:589)
-	at java.base/sun.nio.ch.Net.connect(Net.java:578)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:583)
-	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
-	at java.base/java.net.Socket.connect(Socket.java:751)
-	at java.base/java.net.Socket.connect(Socket.java:686)
-	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:359)
-	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:238)
-	at com.sun.mail.iap.Protocol.&lt;init&gt;(Protocol.java:134)
-	at com.sun.mail.imap.protocol.IMAPProtocol.&lt;init&gt;(IMAPProtocol.java:131)
-	at com.sun.mail.imap.IMAPStore.newIMAPProtocol(IMAPStore.java:763)
-	at com.sun.mail.imap.IMAPStore.protocolConnect(IMAPStore.java:698)
-	... 30 more
-
-</div> <!-- stack-trace -->
-                </div> <!-- method-content -->
-              </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
                   <a name="testCleanImapAccountShouldThrowOnConnectionFailure">
                   </a> <!-- testCleanImapAccountShouldThrowOnConnectionFailure -->
                   <span class="method-name">testCleanImapAccountShouldThrowOnConnectionFailure</span>
                   <div class="stack-trace">org.testng.TestException: 
-Expected exception of type class javax.mail.MessagingException but got java.lang.RuntimeException: Fout bij IMAP-operatie voor user
-	at org.testng.internal.ExpectedExceptionsHolder.wrongException(ExpectedExceptionsHolder.java:68)
-	at org.testng.internal.TestInvoker.considerExceptions(TestInvoker.java:739)
+Method ExternalMailCleanerMailetTest.testCleanImapAccountShouldThrowOnConnectionFailure()[pri:0, instance:org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest@35d019a3] should have thrown an exception of type class javax.mail.MessagingException
+	at org.testng.internal.ExpectedExceptionsHolder.noException(ExpectedExceptionsHolder.java:82)
+	at org.testng.internal.TestInvoker.considerExceptions(TestInvoker.java:749)
 	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:634)
 	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
 	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
@@ -247,34 +186,6 @@ Expected exception of type class javax.mail.MessagingException but got java.lang
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-Caused by: java.lang.RuntimeException: Fout bij IMAP-operatie voor user
-	at com.kwee.james.mailets.ExternalMailCleanerMailet.cleanImapAccount(ExternalMailCleanerMailet.java:113)
-	at com.kwee.james.mailets.ExternalMailCleanerMailetTest.testCleanImapAccountShouldThrowOnConnectionFailure(ExternalMailCleanerMailetTest.java:97)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-	... 22 more
-Caused by: com.sun.mail.util.MailConnectException: Couldn&apos;t connect to host, port: invalid.server, 993; timeout -1;
-  nested exception is:
-	java.net.UnknownHostException: invalid.server
-	at com.sun.mail.imap.IMAPStore.protocolConnect(IMAPStore.java:740)
-	at javax.mail.Service.connect(Service.java:366)
-	at javax.mail.Service.connect(Service.java:246)
-	at com.kwee.james.mailets.ExternalMailCleanerMailet.cleanImapAccount(ExternalMailCleanerMailet.java:93)
-	... 27 more
-Caused by: java.net.UnknownHostException: invalid.server
-	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567)
-	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
-	at java.base/java.net.Socket.connect(Socket.java:751)
-	at java.base/java.net.Socket.connect(Socket.java:686)
-	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:359)
-	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:238)
-	at com.sun.mail.iap.Protocol.&lt;init&gt;(Protocol.java:134)
-	at com.sun.mail.imap.protocol.IMAPProtocol.&lt;init&gt;(IMAPProtocol.java:131)
-	at com.sun.mail.imap.IMAPStore.newIMAPProtocol(IMAPStore.java:763)
-	at com.sun.mail.imap.IMAPStore.protocolConnect(IMAPStore.java:698)
-	... 30 more
 
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
@@ -296,7 +207,7 @@ Caused by: java.net.UnknownHostException: invalid.server
 	at org.powermock.reflect.internal.WhiteboxImpl.doInvokeMethod(WhiteboxImpl.java:822)
 	at org.powermock.reflect.internal.WhiteboxImpl.invokeMethod(WhiteboxImpl.java:690)
 	at org.powermock.reflect.Whitebox.invokeMethod(Whitebox.java:401)
-	at com.kwee.james.mailets.ExternalMailCleanerMailetTest.testDecryptPassword(ExternalMailCleanerMailetTest.java:90)
+	at org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest.testDecryptPassword(ExternalMailCleanerMailetTest.java:89)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
@@ -332,9 +243,16 @@ Caused by: java.net.UnknownHostException: invalid.server
           <div class="suite-Default_suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">com.kwee.james.mailets.ExternalMailCleanerMailetTest</span>
+              <span class="class-name">org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCleanImapAccountDryRun">
+                  </a> <!-- testCleanImapAccountDryRun -->
+                  <span class="method-name">testCleanImapAccountDryRun</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
                   <a name="testInitShouldSetDefaultValues">
@@ -354,7 +272,7 @@ Caused by: java.net.UnknownHostException: invalid.server
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">G:\Users\René\AppData\Local\Temp\testng-eclipse-249947601\testng-customsuite.xml</span>
+            <span class="header-content">G:\Users\René\AppData\Local\Temp\testng-eclipse--1801391492\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -363,7 +281,7 @@ Caused by: java.net.UnknownHostException: invalid.server
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.kwee.james.mailets.ExternalMailCleanerMailetTest&quot;/&gt;
+      &lt;class name=&quot;org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -405,30 +323,30 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(5);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'testCleanImapAccountDryRun')
-data.setCell(0, 2, 'com.kwee.james.mailets.ExternalMailCleanerMailetTest')
-data.setCell(0, 3, 21355);
+data.setCell(0, 1, 'testServiceShouldNotThrowWithValidInput')
+data.setCell(0, 2, 'org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest')
+data.setCell(0, 3, 258);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'testServiceShouldNotThrowWithValidInput')
-data.setCell(1, 2, 'com.kwee.james.mailets.ExternalMailCleanerMailetTest')
-data.setCell(1, 3, 335);
+data.setCell(1, 1, 'testCleanImapAccountDryRun')
+data.setCell(1, 2, 'org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest')
+data.setCell(1, 3, 152);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'testCleanImapAccountShouldThrowOnConnectionFailure')
-data.setCell(2, 2, 'com.kwee.james.mailets.ExternalMailCleanerMailetTest')
-data.setCell(2, 3, 23);
+data.setCell(2, 2, 'org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest')
+data.setCell(2, 3, 123);
 data.setCell(3, 0, 3)
 data.setCell(3, 1, 'testDecryptPassword')
-data.setCell(3, 2, 'com.kwee.james.mailets.ExternalMailCleanerMailetTest')
-data.setCell(3, 3, 9);
+data.setCell(3, 2, 'org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest')
+data.setCell(3, 3, 39);
 data.setCell(4, 0, 4)
 data.setCell(4, 1, 'testInitShouldSetDefaultValues')
-data.setCell(4, 2, 'com.kwee.james.mailets.ExternalMailCleanerMailetTest')
-data.setCell(4, 3, 2);
+data.setCell(4, 2, 'org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest')
+data.setCell(4, 3, 4);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 21 seconds</span>
+              <span class="suite-total-time">Total running time: 576 ms</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -454,52 +372,50 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.kwee.james.mailets.ExternalMailCleanerMailetTest</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">org.apache.james.mailets.kwee.ExternalMailCleanerMailetTest</div> <!-- chronological-class-name -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">testCleanImapAccountDryRun</span>
-                <span class="method-start">725 ms</span>
+                <span class="method-start">834 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">22083 ms</span>
+                <span class="method-start">988 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">testCleanImapAccountShouldThrowOnConnectionFailure</span>
-                <span class="method-start">22084 ms</span>
+                <span class="method-start">988 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">22109 ms</span>
+                <span class="method-start">1121 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">testDecryptPassword</span>
-                <span class="method-start">22109 ms</span>
+                <span class="method-start">1124 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">22119 ms</span>
+                <span class="method-start">1168 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testInitShouldSetDefaultValues</span>
-                <span class="method-start">22120 ms</span>
+                <span class="method-start">1172 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">22123 ms</span>
+                <span class="method-start">1178 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testServiceShouldNotThrowWithValidInput</span>
-                <span class="method-start">22124 ms</span>
+                <span class="method-start">1179 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
