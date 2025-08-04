@@ -13,7 +13,7 @@ import org.apache.commons.configuration2.tree.ImmutableNode;
  */
 public class FetchMailConfig {
   /**
-   * 
+   * Fetch mail configuration XML to objects
    */
   private String name;
   private String host;

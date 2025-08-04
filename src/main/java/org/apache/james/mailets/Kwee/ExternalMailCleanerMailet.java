@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Mailet for cleaning external mail providers.
- * 
+ *  
  */
 public class ExternalMailCleanerMailet extends GenericMailet {
   private static final Logger LOGGER = LoggerFactory.getLogger(ExternalMailCleanerMailet.class);
