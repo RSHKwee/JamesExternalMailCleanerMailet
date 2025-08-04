@@ -59,14 +59,19 @@ public class ExternalMailCleanerMailet extends GenericMailet {
   }
 
   private void cleanExternalAccounts() throws Exception {
-    // Laad configuratie
-    XMLConfiguration config = new Configurations().xml(jamesConfDir + "/" + fetchmailFile);
+    XMLConfiguration config;
+    // Load configuration
+    if (jamesConfDir.isEmpty()) {
+      config = new Configurations().xml(fetchmailFile);
+    } else {
+      config = new Configurations().xml(jamesConfDir + "/" + fetchmailFile);
+    }
 
-    // Verwerk alle fetch-blokken
+    // Process all fetch-blocks
     config.configurationsAt("fetch").forEach(fetchNode -> {
       FetchMailConfig fetchConfig = FetchMailConfig.fromXml(fetchNode, defaultDaysOld);
 
-      // Verwerk accounts
+      // Process accounts
       fetchConfig.getAccounts().forEach(account -> {
         Properties properties = new Properties();
         // Default properties for IMAPS
@@ -84,7 +89,7 @@ public class ExternalMailCleanerMailet extends GenericMailet {
         LOGGER.debug("Host: " + fetchConfig.getHost() + "| Days old: " + daysold);
 
         if (daysold > 0) {
-          // Maak verbinding en verwijder oude mails
+          // Make connection and delete old mails
           cleanAccount(fetchConfig.getHost(), fetchConfig.getJavaMailProviderName(),
               fetchConfig.getJavaMailFolderName(), fetchConfig.getJavaMailProperties(), account.getUser(),
 //            decryptPassword(account.getPassword(), masterPassword), account.getDaysOld());
@@ -101,17 +106,15 @@ public class ExternalMailCleanerMailet extends GenericMailet {
       Store store = session.getStore(protocol);
       store.connect(host, user, password);
 
-      // Open bronfolder (INBOX)
       Folder sourceFolder = store.getFolder(folderName);
       sourceFolder.open(Folder.READ_WRITE);
 
-      // Bepaal cutoff datum
+      // Define cutoff date
       Date cutoffDate = Date.from(LocalDate.now().minusDays(daysOld).atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-      // Zoek oude mails
+      // Search old mails on receive date
       Message[] oldMessages = sourceFolder.search(new ReceivedDateTerm(ComparisonTerm.LT, cutoffDate));
       if (oldMessages.length > 0) {
-        // Maak doelfolder aan indien niet bestaat
         String archiveFolderName = archiveFolder;
         Folder targetFolder = store.getFolder(archiveFolderName);
         if (!targetFolder.exists()) {
@@ -120,20 +123,25 @@ public class ExternalMailCleanerMailet extends GenericMailet {
         }
         targetFolder.open(Folder.READ_WRITE);
 
+        // Haal Trash-folder op
+        Folder trashFolder = getTrashFolder(store);
+        trashFolder.open(Folder.READ_WRITE);
+
         if (dryRun) {
           LOGGER.info("DRY RUN: Would move " + oldMessages.length + " messages to " + archiveFolderName);
         } else {
-          // Verplaats berichten
+          // Move mails
           sourceFolder.copyMessages(oldMessages, targetFolder);
           LOGGER.info("Moved " + oldMessages.length + " messages to " + archiveFolderName);
           if (deleteOriginals) {
-            // Markeer origineel voor verwijdering (optioneel)
+            // Mark original for deletion (optional)
             sourceFolder.setFlags(oldMessages, new Flags(Flags.Flag.DELETED), true);
-            LOGGER.info("Original messages marked for deletion: " + oldMessages.length);
+            sourceFolder.copyMessages(oldMessages, trashFolder);
+            LOGGER.info("Original messages are deleted: " + oldMessages.length);
           }
         }
 
-        // Sluit folders
+        // Close folders
         targetFolder.close(false);
       }
       sourceFolder.close(false);
@@ -167,6 +175,28 @@ public class ExternalMailCleanerMailet extends GenericMailet {
     }
   }
 
+//Voeg deze methode toe aan je mailet
+  private Folder getTrashFolder(Store store) throws MessagingException {
+    // Probeer veelgebruikte trash-folder namen
+    String[] possibleNames = { "[Gmail]/Trash", "[Gmail]/Bin", "Trash", "Deleted Items" };
+
+    for (String name : possibleNames) {
+      Folder folder = store.getFolder(name);
+      if (folder.exists()) {
+        return folder;
+      }
+    }
+    // Fallback: maak een Trash folder aan
+    Folder trash = store.getFolder("Trash");
+    if (!trash.exists()) {
+      trash.create(Folder.HOLDS_MESSAGES);
+    }
+    return trash;
+  }
+
+  /**
+   * Private Class it extends DateTerm
+   */
   private static class ReceivedDateTerm extends DateTerm {
     private static final long serialVersionUID = -4107976014340562208L;
 

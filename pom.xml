@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.kwee.james</groupId>
+  <groupId>org.apache.james.mailets.kwee</groupId>
   <artifactId>external-mail-cleaner</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
@@ -97,7 +97,7 @@
       <version>7.4.0</version>
       <scope>test</scope>
     </dependency>
-    
+
     <!-- Mockito -->
     <dependency>
       <groupId>org.mockito</groupId>
@@ -105,7 +105,12 @@
       <version>3.12.4</version>
       <scope>test</scope>
     </dependency>
-    
+    <dependency>
+      <groupId>com.icegreen</groupId>
+      <artifactId>greenmail</artifactId>
+      <version>1.6.11</version> <!-- JavaMail-compatibele versie -->
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-module-testng</artifactId>
