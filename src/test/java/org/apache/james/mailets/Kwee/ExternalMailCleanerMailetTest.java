@@ -1,8 +1,6 @@
 package org.apache.james.mailets.kwee;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Collection;
@@ -19,7 +17,6 @@ import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.mailet.Mail;
 import org.apache.mailet.MailetContext;
 import org.apache.mailet.base.test.FakeMailetConfig;
 import org.slf4j.Logger;
@@ -109,24 +106,24 @@ public class ExternalMailCleanerMailetTest {
   }
 
   @Test
-  public void testServiceShouldNotThrowWithValidInput() throws MessagingException {
-    mailet.init(mailetConfig);
-    Mail mail = mock(Mail.class);
-    mailet.service(mail); // Should not throw
-  }
-
-  @Test
   public void testCleanImapAccountDryRun() throws Exception {
     mailet.init(mailetConfig);
-    // Mock IMAP server
-    Store store = mock(Store.class);
-    Folder folder = mock(Folder.class);
-    when(store.getFolder("INBOX")).thenReturn(folder);
-    when(folder.search(any())).thenReturn(new Message[] { new MimeMessage((Session) null) });
+    try (Store store = greenMail.getImap().createStore()) {
+      String folderName = "INBOX";
+      ImapHostManager imapHostManager = greenMail.getManagers().getImapHostManager();
 
-    // Test dry run mode
-    mailet.setInitParameter("dryRun", "true");
-    mailet.service(null);
+      GreenMailUser guser = greenMail.setUser(user, userid, password);
+      MailFolder inbox = imapHostManager.getFolder(guser, folderName);
+      int count = fillInbox(inbox);
+
+      mailet.setInitParameter("dryRun", "true");
+      mailet.service(null);
+      Assert.assertEquals(inbox.getMessageCount(), count, "There should be " + count + "  mails present.");
+
+      MailFolder archive = imapHostManager.getFolder(guser, folderNameArchive);
+      Assert.assertEquals(archive.getMessageCount(), 0, "There should be 0  mails present.");
+      listFolders();
+    }
   }
 
   @Test

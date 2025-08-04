@@ -1,7 +1,0 @@
-<fetchmail>
-  <server>imap.gmail.com</server>
-  <userid>james@domein.nl</userid>
-  <password>ENCRYPTED_PASSWORD</password>
-  <enabled>true</enabled>
-  <daysOld>90</daysOld> <!-- Account-specifieke instelling -->
-</fetchmail>
