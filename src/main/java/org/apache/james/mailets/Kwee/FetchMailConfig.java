@@ -1,4 +1,4 @@
-package org.apache.james.mailets.kwee;
+package org.apache.james.mailets.Kwee;
 
 import java.util.ArrayList;
 import java.util.Arrays;

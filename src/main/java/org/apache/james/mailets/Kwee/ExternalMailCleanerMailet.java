@@ -1,4 +1,4 @@
-package org.apache.james.mailets.kwee;
+package org.apache.james.mailets.Kwee;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Mailet for cleaning external mail providers.
- *  
+ * 
  */
 public class ExternalMailCleanerMailet extends GenericMailet {
   private static final Logger LOGGER = LoggerFactory.getLogger(ExternalMailCleanerMailet.class);
