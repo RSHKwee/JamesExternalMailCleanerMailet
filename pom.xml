@@ -14,20 +14,21 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>11</java.version>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <java.version>17</java.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
     <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
     <maven.surefire.plugin.version>3.2.2</maven.surefire.plugin.version>
     <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
-    <james.version>3.8.2</james.version> <!-- Pas aan naar jouw James versie -->
+    <james.version>3.9.0</james.version> <!-- Pas aan naar jouw James versie -->
     <commons.configuration.version>2.8.0</commons.configuration.version>
     <javamail.version>1.6.2</javamail.version>
     <org.slf4j.version>2.0.4</org.slf4j.version>
     <testng.version>7.8.0</testng.version>
     <mockito.core.version>5.6.0</mockito.core.version>
- </properties>
+    <greenmail.version>2.1.7</greenmail.version>
+</properties>
 
   <dependencies>
     <!-- James Mailet API -->
@@ -69,14 +70,6 @@
       <scope>provided</scope>
     </dependency>
     
-    <!-- JavaMail (IMAP) -->
-    <dependency>
-      <groupId>com.sun.mail</groupId>
-      <artifactId>javax.mail</artifactId>
-      <version>${javamail.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
     <!-- Logging -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -131,7 +124,7 @@
     <dependency>
       <groupId>com.icegreen</groupId>
       <artifactId>greenmail</artifactId>
-      <version>1.6.11</version> <!-- JavaMail-compatibele versie -->
+      <version>${greenmail.version}</version> <!-- JavaMail-compatibele versie -->
       <scope>test</scope>
     </dependency>
   </dependencies>

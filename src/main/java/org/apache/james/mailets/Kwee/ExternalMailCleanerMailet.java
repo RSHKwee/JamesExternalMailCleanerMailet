@@ -5,15 +5,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Properties;
 
-import javax.mail.Flags;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.search.ComparisonTerm;
-import javax.mail.search.DateTerm;
-
 import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.mailet.Mail;
@@ -21,6 +12,15 @@ import org.apache.mailet.MailetException;
 import org.apache.mailet.base.GenericMailet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import jakarta.mail.Flags;
+import jakarta.mail.Folder;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.mail.Store;
+import jakarta.mail.search.ComparisonTerm;
+import jakarta.mail.search.DateTerm;
 
 /**
  * Mailet for cleaning external mail providers.
