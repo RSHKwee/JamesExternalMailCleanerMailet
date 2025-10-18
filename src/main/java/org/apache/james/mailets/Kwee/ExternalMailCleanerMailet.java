@@ -53,7 +53,7 @@ public class ExternalMailCleanerMailet extends GenericMailet {
     try {
       cleanExternalAccounts();
     } catch (Exception e) {
-      LOGGER.info("Error cleaning external accounts: " + e.getMessage());
+      LOGGER.error("Error cleaning external accounts: " + e.getMessage());
       e.printStackTrace();
     }
   }

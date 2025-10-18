@@ -22,7 +22,7 @@
     <maxmessagesize limit="0" reject="false" leaveonserver="true" markseen="false"/>
     <undeliverable leaveonserver="true" markseen="false"/>
     <recipientnotfound defer="true" reject="true" leaveonserver="true" markseen="false"/>
-    <blacklist reject="true" leaveonserver="true" markseen="false"> wibble@localhost, flobble@localhost</blacklist>
+    <blacklist reject="true" leaveonserver="true" markseen="false">wibble@localhost, flobble@localhost</blacklist>
     <userundefined reject="true" leaveonserver="true" markseen="false" />
     <remoterecipient reject="false" leaveonserver="true" markseen="false">postmaster@localhost</remoterecipient>
     <daysOld>30</daysOld> <!-- Account-specifieke instelling -->
